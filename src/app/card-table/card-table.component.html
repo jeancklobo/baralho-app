@@ -1,0 +1,23 @@
+<div *ngIf="cartas.length == 0">
+  <h4>Nenhuma carta adicionada!</h4>
+</div>
+
+<div *ngIf="cartas.length > 0">
+
+  <table class="highlight responsive-table">
+    <thead>
+      <tr>
+          <th>Nome da Carta</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of this.cartas">
+        <td (click)="onClick()">{{c}}</td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div>

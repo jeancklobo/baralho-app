@@ -1,0 +1,43 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col s6">
+
+      <label>Nome do Baralho:</label>
+      <input type="text" [disabled]="disable" [(ngModel)]="this.baralho" name="input-name"/>
+
+    </div>
+
+    <div class="col s3">
+
+      <label>Jogo:</label>
+      <select class="browser-default" [(ngModel)]="this.jogo" name="sel-jogo">
+        <option value="" disabled selected>Escolha um jogo</option>
+        <option [value]="i" *ngFor="let i of jogos">{{i}}</option>
+
+        <!-- <option value="1">Magic</option>
+        <option value="2">Pokemon</option>
+        <option value="3">Yu-Gi-Oh</option> -->
+      </select>
+
+    </div>
+
+    <div class="col s3">
+
+      <label>Tipo:</label>
+      <select class="browser-default" [(ngModel)]="this.tipo" name="sel-tipo">
+        <option value="" disabled selected>Escolha um tipo</option>
+        <option [value]="i" *ngFor="let i of jogos">{{i}}</option>
+        <!-- <option value="1">Competitivo</option>
+        <option value="2">Semi-Competitivo</option>
+        <option value="3">Casual</option> -->
+      </select>
+
+    </div>
+
+    <a class="waves-effect red btn" (click)="onClick()"><i class="material-icons right">add_circle_outline</i>Salvar</a>
+    <a class="waves-effect waves-light btn" (click)="clean()"><i class="material-icons right">cloud_queue</i>Limpar</a>
+
+  </div>
+
+</div>

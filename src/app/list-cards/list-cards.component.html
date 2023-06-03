@@ -1,0 +1,23 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col s6">
+      <label for="">Nome da Carta:</label>
+      <input type="text"/>
+    </div>
+
+    <div class="col s1">
+      <label for="">Quantidade:</label>
+      <input type="text"/>
+    </div>
+
+  </div>
+
+  <app-card-table [cartas]="this.cartas" (alterationEvent)="this.onAlterationEvent($event)"></app-card-table>
+
+</div>
+
+
+
+
