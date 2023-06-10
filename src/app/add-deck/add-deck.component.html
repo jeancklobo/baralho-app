@@ -1,43 +1,85 @@
 <div class="container">
 
   <div class="row">
-    <div class="col s6">
 
-      <label>Nome do Baralho:</label>
-      <input type="text" [disabled]="disable" [(ngModel)]="this.baralho" name="input-name"/>
+    <form #form="ngForm" (submit)="onClick()">
 
-    </div>
+
+
+      <div class="col s6">
+          <div class="input-field">
+
+            <label for="input-name" class="active">Nome do Baralho:</label>
+            <input
+            type="text"
+
+            [(ngModel)]="this.baralho.name"
+            name="input-name"
+            id="input-name"
+            class="validate"
+            pattern="^[A-Za-zÀ-Úà-ú\d]+[A-Za-zÀ-Úà-ú\d\s]*"
+            required
+            placeholder="Informe um nome:"
+            #name="ngModel"/>
+
+            <div class="red-text" *ngIf="!name.valid && name.touched">
+              Nome Inválido
+            </div>
+            <span class="helper-text"
+          data-error="Campo inválido"
+          data-success="Válido"></span>
+          </div>
+        </div>
 
     <div class="col s3">
 
       <label>Jogo:</label>
-      <select class="browser-default" [(ngModel)]="this.jogo" name="sel-jogo">
-        <option value="" disabled selected>Escolha um jogo</option>
+      <select
+        class="browser-default"
+        [(ngModel)]="this.baralho.game"
+        name="sel-jogo"
+        id="sel-jogo"
+        [compareWith]="compareGames"
+        #game="ngModel"
+        #gameSelect="ngModel"
+        required>
+        <option [value]="" disabled selected>Escolha um jogo</option>
         <option [value]="i" *ngFor="let i of jogos">{{i}}</option>
 
-        <!-- <option value="1">Magic</option>
-        <option value="2">Pokemon</option>
-        <option value="3">Yu-Gi-Oh</option> -->
       </select>
-
+      <div class="red-text" [hidden]="game.valid || game.untouched">Informe um jogo</div>
     </div>
 
     <div class="col s3">
 
-      <label>Tipo:</label>
-      <select class="browser-default" [(ngModel)]="this.tipo" name="sel-tipo">
-        <option value="" disabled selected>Escolha um tipo</option>
-        <option [value]="i" *ngFor="let i of jogos">{{i}}</option>
-        <!-- <option value="1">Competitivo</option>
-        <option value="2">Semi-Competitivo</option>
-        <option value="3">Casual</option> -->
+      <label class="active">Tipo:</label>
+
+      <select
+        class="browser-default"
+        [(ngModel)]="this.baralho.type"
+        id="sel-tipo"
+        name="sel-tipo"
+        #type="ngModel"
+        #typeSelect="ngModel"
+        required>
+        <option [ngValue]="" disabled selected>Escolha um tipo</option>
+        <option [ngValue]="i" *ngFor="let i of tipos">{{i}}</option>
       </select>
+
+      <div class="red-text" [hidden]="type.valid || type.untouched">Informe um tipo</div>
 
     </div>
 
-    <a class="waves-effect red btn" (click)="onClick()"><i class="material-icons right">add_circle_outline</i>Salvar</a>
-    <a class="waves-effect waves-light btn" (click)="clean()"><i class="material-icons right">cloud_queue</i>Limpar</a>
+    <div class="col s12 left">
+
+      <button class="waves-effect waves-light red btn" [disabled]="!form.valid"><i class="material-icons right">add_circle_outline</i>
+        {{this.text}}</button>
+      <button class="waves-effect waves-light btn" (click)="clean()"><i class="material-icons right">cloud_queue</i>Limpar</button>
+    </div>
+    <!-- <a class="waves-effect red btn" (click)="onClick()"><i class="material-icons right">add_circle_outline</i>Salvar</a>
+      <a class="waves-effect waves-light btn" (click)="clean()"><i class="material-icons right">cloud_queue</i>Limpar</a> -->
+
+    </form>
+    </div>
 
   </div>
-
-</div>

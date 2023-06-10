@@ -2,19 +2,69 @@
 
   <div class="row">
 
-    <div class="col s6">
-      <label for="">Nome da Carta:</label>
-      <input type="text"/>
+    <form #form="ngForm" (submit)="onSubmit()">
+
+      <div class="input-field">
+        <!-- \u0022 igual a " -->
+        <div class="col s6">
+          <label for="card-name">Nome da Carta:</label>
+          <input id="card-name"
+          name="card-name"
+          class="validate"
+          pattern="^[A-Za-zÀ-Úà-ú\d\.\/:,'ºª\u0022!?-]+[A-Za-zÀ-Úà-ú\d\s\.:\/,'@ºª#\u0022!?-]*"
+          type="text"
+          required
+          placeholder="placeholder"
+          [(ngModel)] = "this.carta.name"
+          #name="ngModel"
+          />
+          <div class="red-text" *ngIf="!name.valid && name.touched">
+            Nome Inválido
+          </div>
+          <span class="helper-text"
+          data-error="Campo inválido"
+          data-success="Válido"></span>
+        </div>
+      </div>
+
+        <div class="input-field">
+
+          <div class="col s2">
+            <label for="card-qtd">Quantidade:</label>
+              <input
+              type="text"
+              id="card-qtd"
+              class="validate"
+              required
+              pattern="[1-9]"
+              name="card-qtd"
+              [(ngModel)] = "this.carta.qtd" [defaultValue]=1
+              #qtd="ngModel"/>
+
+              <div class="red-text" *ngIf="qtd.errors && qtd.touched">
+                Quantidade min = 1 max = 9
+              </div>
+              <span class="helper-text"
+              data-error="Campo inválido"
+              data-success="Válido"></span>
+
+          </div>
+        </div>
+
+        <div class="col s12">
+
+          <button class="btn wave-effect amber darken-4" type="submit" [disabled]="!form.valid">{{this.text}}</button>
+        </div>
+
+      </form>
+
+
     </div>
 
-    <div class="col s1">
-      <label for="">Quantidade:</label>
-      <input type="text"/>
-    </div>
-
-  </div>
-
-  <app-card-table [cartas]="this.cartas" (alterationEvent)="this.onAlterationEvent($event)"></app-card-table>
+  <app-card-table
+    [cartas]="this.cartas"
+    (alterationEvent)="this.onAlterationEvent($event)"
+    (deletionEvent)="this.onDelete($event)"></app-card-table>
 
 </div>
 

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Card } from '../model/card';
 
 @Component({
   selector: 'app-card-table',
@@ -6,11 +7,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./card-table.component.css']
 })
 export class CardTableComponent {
-  @Input() cartas!: String[];
-  @Output() alterationEvent = new EventEmitter<Number>();
+  @Input() cartas!: Card[];
+  @Output() alterationEvent = new EventEmitter<Card>();
+  @Output() deletionEvent = new EventEmitter<Card>();
 
-  onClick(){
+  onClick(c: Card){
 
-    this.alterationEvent.emit(1);
+    this.alterationEvent.emit(c);
+  }
+
+  onDeletion(c: Card){
+    this.deletionEvent.emit(c);
   }
 }

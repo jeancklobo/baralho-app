@@ -8,20 +8,14 @@
   </thead>
 
   <tbody>
-    <tr routerLink="cartas/1">
-      <td>Baralho 1</td>
-      <td>Magic</td>
-      <td>Casual</td>
-    </tr>
-    <tr routerLink="cartas/2">
-      <td>Baralho 2</td>
-      <td>Magic</td>
-      <td>Casual</td>
-    </tr>
-    <tr routerLink="cartas/3">
-      <td>Baralho 3</td>
-      <td>Pokemon</td>
-      <td>Competitivo</td>
+    <tr *ngFor="let d of this.decks" routerLink="cartas/{{this.d.id}}">
+      <td>{{this.d.name}}</td>
+      <td>{{this.d.game}}</td>
+      <td>{{this.d.type}}</td>
+      <td class="right">
+        <a><i (click)="onClick(d)" class="material-icons">edit</i></a>
+        <a><i (click)="onDelete(d)" class="material-icons">delete</i></a>
+      </td>
     </tr>
   </tbody>
 </table>

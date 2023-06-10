@@ -1,43 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { CardService } from './../service/card.service';
+import { Card } from './../model/card';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
+import { Shared } from '../util/shared';
 @Component({
   selector: 'app-list-cards',
   templateUrl: './list-cards.component.html',
   styleUrls: ['./list-cards.component.css']
 })
-export class ListCardsComponent {
+export class ListCardsComponent implements OnInit{
 
-  cartas1: String[];
-  cartas2: String[];
-  cartas3: String[] = [];
-  cartas!: String[];
+  @ViewChild('form') form!: NgForm;
 
-  constructor(private route: ActivatedRoute){
-    this.cartas1 = ['carta1', 'teste1','exemplo1'];
-    this.cartas2 = ['carta2'];
-  }
+  cartas!: Card[];
+  carta!: Card;
+  id!: number;
+  save: boolean = true;
+  text: string = 'CADASTRAR';
+
+  constructor(private route: ActivatedRoute, private cardService: CardService){}
 
   ngOnInit():void{
-
-    let id: number = this.route.snapshot.params['id'];
-
-    if (id == 1) {
-      this.cartas = this.cartas1;
-
-    } else {
-      if (id == 2) {
-
-        this.cartas = this.cartas2;
-      } else {
-
-        this.cartas = this.cartas3;
-      }
-    }
-
+    Shared.initializeWebStorage();
+    this.carta = new Card('',1);
+    this.id = this.route.snapshot.params['id'];
+    this.cartas = this.cardService.returnCards(this.id);
+    this.save = true;
+    this.text = 'CADASTRAR';
   }
 
-  onAlterationEvent(id: Number){
-    alert('Tabela Clicada!');
+  onSubmit(){
+
+    if(this.save){
+      this.cardService.save(this.carta);
+    } else{
+      this.cardService.update(this.carta);
+      this.save = true;
+    }
+    this.cartas = this.cardService.returnCards(this.id);
+    this.carta = new Card('',1);
+    this.form.reset();
+  }
+
+  onDelete(c: Card){
+    this.cardService.delete(c);
+    this.cartas = this.cardService.returnCards(this.id);
+  }
+
+  onAlterationEvent(c: Card){
+    this.save = false;
+    this.text = 'EDITAR';
+    let clone = new Card('',0);
+
+    clone.id = c.id;
+    clone.name = c.name;
+    clone.qtd = c.qtd;
+
+    this.carta = clone;
   }
 }

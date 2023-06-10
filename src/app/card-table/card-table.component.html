@@ -8,14 +8,18 @@
     <thead>
       <tr>
           <th>Nome da Carta</th>
-
+          <th>Quantidade</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let c of this.cartas">
-        <td (click)="onClick()">{{c}}</td>
-
+      <tr (click)="onClick(c)" *ngFor="let c of this.cartas">
+        <td >{{this.c.name}}</td>
+        <td >{{this.c.qtd}}</td>
+        <td class="right">
+          <a><i (click)="onClick(c)" class="material-icons">edit</i></a>
+          <a><i (click)="onDeletion(c)" class="material-icons">delete</i></a>
+        </td>
       </tr>
 
     </tbody>
