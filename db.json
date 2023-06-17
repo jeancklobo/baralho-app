@@ -1,0 +1,19 @@
+{
+  "decks": [
+    {
+      "id": 1,
+      "name": "qwert",
+      "game": "Pokemon",
+      "type": "Semi-Competitivo",
+      "cards": []
+    },
+    {
+      "id": 2,
+      "name": "qwert2",
+      "game": "Magic",
+      "type": "Competitivo",
+      "cards": []
+    }
+  ],
+  "cards": []
+}

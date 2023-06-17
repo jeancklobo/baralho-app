@@ -1,3 +1,4 @@
+import { DeckServicePromice } from './../service/deck.service.promice';
 import { DeckService } from './../service/deck.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Deck } from '../model/deck';
@@ -20,7 +21,11 @@ export class AddDeckComponent implements OnInit{
 
   tipos: String[] = 'Competitivo Semi-Competitivo Casual'.split(' ');
   jogos: String[] = [ 'Magic','Pokemon','Yu-Gi-Oh'];
-  constructor(private deckService: DeckService, private router: Router, private route: ActivatedRoute){
+  constructor(
+    private deckService: DeckService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private deckServicePromice: DeckServicePromice){
     //this.disable = false;
     this.baralho = new Deck('','','');
 
@@ -28,7 +33,25 @@ export class AddDeckComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       if(params['id'] > 0){
-        this.baralho = this.deckService.returnById(params['id']);
+        this.deckServicePromice.getAll().then((val)=>{
+          let decks = val;
+          let index = val.findIndex(u => u.id == params['id']);
+          this.baralho = decks[index];
+        }).catch(() => {
+          console.log('erro');
+          this.baralho = this.deckService.returnById(params['id']);
+        });
+        //this.baralho = this.deckService.returnById(params['id']);
+        /* this.deckServicePromice.getById(params['id'])
+        .then((value)=>{
+          this.baralho = value[0];
+          alert(this.baralho);
+        })
+        .catch(()=>
+          this.baralho = this.deckService.returnById(params['id'])
+          ); */
+          /* this.baralho = this.deckPromise.getById(params['id']);
+          console.log(this.baralho); */
         this.save = false;
         this.text = 'Editar';
       } else {
@@ -41,19 +64,49 @@ export class AddDeckComponent implements OnInit{
   }
 
   onClick(){
-    alert(`Baralho Salvo!!
+/*     alert(`Baralho Salvo!!
             Nome: ${this.baralho.name}
             Jogo: ${this.baralho.game}
-            Tipo: ${this.baralho.type}`);
+            Tipo: ${this.baralho.type}`); */
     //this.disable = true;
 
     if(this.save){
 
-      this.deckService.save(new Deck(this.baralho.name,this.baralho.game,this.baralho.type));
-      this.router.navigate(['listar']);
+      //let newDeck: Deck = new Deck(this.baralho.name,this.baralho.game,this.baralho.type);
+
+      this.deckServicePromice.save(this.baralho)
+      .then((value) => {
+
+        this.deckService.save(this.baralho);
+
+        console.log(`Baralho Salvo!!
+            Nome: ${value.name}
+            Jogo: ${value.game}
+            Tipo: ${value.type}`);
+
+            this.router.navigate(['listar']);
+      }).catch(()=>{
+        console.log('Erro! Não foi possível adicionar baralho!');
+      });
+
     } else {
-      this.deckService.update(this.baralho);
-      this.router.navigate(['listar']);
+      this.deckServicePromice.patch(this.baralho).then(()=>{
+        this.router.navigate(['listar']);
+
+      }).catch(()=>{
+        console.log('Erro! Não foi possível atualizar baralho!');
+      });
+      /* .then((d)=>{
+        this.deckService.update(d);
+        console.log(`Baralho Salvo!!
+            Nome: ${d.name}
+            Jogo: ${d.game}
+            Tipo: ${d.type}`);
+      })
+      .catch(()=>{
+        console.log('Erro! Não foi possível adicionar baralho!')
+      }); */
+
 
     }
 
