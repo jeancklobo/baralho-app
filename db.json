@@ -13,7 +13,51 @@
       "game": "Magic",
       "type": "Competitivo",
       "cards": []
+    },
+    {
+      "id": 3,
+      "name": "baralho 3",
+      "game": "Magic",
+      "type": "Casual",
+      "cards": []
     }
   ],
-  "cards": []
+  "cards": [
+    {
+      "name": "teste2",
+      "qtd": "3",
+      "deckId": "2",
+      "id": 2
+    },
+    {
+      "name": "card 1",
+      "qtd": "2",
+      "deckId": "1",
+      "id": 3
+    },
+    {
+      "name": "teste3",
+      "qtd": 1,
+      "deckId": "2",
+      "id": 4
+    },
+    {
+      "name": "s",
+      "qtd": 1,
+      "deckId": "2",
+      "id": 5
+    },
+    {
+      "name": "qwert",
+      "qtd": 1,
+      "deckId": "3",
+      "id": 6
+    },
+    {
+      "name": "q",
+      "qtd": 1,
+      "deckId": "3",
+      "id": 7
+    }
+  ]
 }

@@ -3,6 +3,7 @@ import { DeckService } from './../service/deck.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Deck } from '../model/deck';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-deck',
@@ -12,10 +13,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddDeckComponent implements OnInit{
 
   //disable: boolean;
+  @ViewChild('form') form!: NgForm;
   baralho: Deck;
   save: boolean = true;
   text!: string;
-
+  color!: string;
  /*  @ViewChild('typeSelect') typeSelect!: ElementRef;
   @ViewChild('gameSelect') gameSelect!: ElementRef; */
 
@@ -53,11 +55,13 @@ export class AddDeckComponent implements OnInit{
           /* this.baralho = this.deckPromise.getById(params['id']);
           console.log(this.baralho); */
         this.save = false;
-        this.text = 'Editar';
+        this.text = 'EDITAR';
+        this.color = 'amber';
       } else {
         this.baralho = new Deck('','','');
         this.save = true;
-        this.text = 'Salvar';
+        this.text = 'SALVAR';
+        this.color = 'red';
       }
 
     });
@@ -114,6 +118,9 @@ export class AddDeckComponent implements OnInit{
 
   clean(){
     this.baralho = new Deck('','','');
+    this.text = 'SALVAR';
+    this.color = 'red';
+    this.form.reset();
     //this.disable = false;
   }
 

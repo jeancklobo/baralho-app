@@ -72,7 +72,7 @@
 
     <div class="col s12 left">
 
-      <button class="waves-effect waves-light red btn" [disabled]="!form.valid"><i class="material-icons right">add_circle_outline</i>
+      <button class="waves-effect waves-light {{this.color}} btn" [disabled]="!form.valid"><i class="material-icons right">add_circle_outline</i>
         {{this.text}}</button>
       <button class="waves-effect waves-light btn" (click)="clean()"><i class="material-icons right">cloud_queue</i>Limpar</button>
     </div>

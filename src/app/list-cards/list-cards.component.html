@@ -53,7 +53,9 @@
 
         <div class="col s12">
 
-          <button class="btn wave-effect amber darken-4" type="submit" [disabled]="!form.valid">{{this.text}}</button>
+          <button class="btn wave-effect {{this.color}}" type="submit" [disabled]="!form.valid">
+            <i class="material-icons right">add_circle</i>{{this.text}}</button>
+          <button class="btn waves-light waves-effect" (click)="this.reset()" type="button"><i class="material-icons right">cloud_queue</i>LIMPAR</button>
         </div>
 
       </form>

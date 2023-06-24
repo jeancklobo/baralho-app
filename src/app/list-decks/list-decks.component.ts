@@ -1,5 +1,5 @@
 import { DeckService } from './../service/deck.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Deck } from '../model/deck';
 import { Shared } from '../util/shared';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { DeckServicePromice } from '../service/deck.service.promice';
   templateUrl: './list-decks.component.html',
   styleUrls: ['./list-decks.component.css']
 })
-export class ListDecksComponent implements OnInit{
+export class ListDecksComponent implements OnInit {
 
   decks?: Deck[];
   constructor(private deckService: DeckService, private router: Router, private deckServicePromice: DeckServicePromice){  }
@@ -30,18 +30,23 @@ export class ListDecksComponent implements OnInit{
     //alert('id: ' + d.id);
   }
 
+  showCards(d: Deck){
+    alert('clicado!');
+    this.router.navigate([`listar/cartas/${d.id}`]);
+  }
+
   onDelete(d: Deck){
     /* this.deckService.delete(d);
     this.decks = this.deckService.returnAll(); */
     this.deckServicePromice.delete(d);
     this.deckServicePromice.getAll().then((value)=>{
-      this.decks = value;
+      this.decks = value;this.ngOnInit();
     }).catch(()=>{
 
       this.decks = this.deckService.returnAll();
     }).finally(()=>{
-      this.router.navigate(['inicio']);
-
+      //this.router.navigate(['inicio']);
+      //window.location.reload();//location.reload();
     });
     alert('Baralho apagado');
   }

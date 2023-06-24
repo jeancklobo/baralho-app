@@ -6,12 +6,12 @@
         <th>Tipo</th>
     </tr>
   </thead>
-
+<!-- routerLink="cartas/{{this.d.id}}" -->
   <tbody>
-    <tr *ngFor="let d of this.decks" routerLink="cartas/{{this.d.id}}">
+    <tr *ngFor="let d of this.decks" (click)="showCards(d)">
       <td>{{this.d.name}}</td>
-      <td>{{this.d.game}}</td>
-      <td>{{this.d.type}}</td>
+      <td>{{this.d.game | uppercase}}</td>
+      <td>{{this.d.type | titlecase}}</td>
       <td class="right">
         <a><i (click)="onClick(d)" class="material-icons">edit</i></a>
         <a><i (click)="onDelete(d)" class="material-icons">delete</i></a>
