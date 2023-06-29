@@ -11,6 +11,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { ListDecksComponent } from './list-decks/list-decks.component';
 import { ListCardsComponent } from './list-cards/list-cards.component';
 import { CardTableComponent } from './card-table/card-table.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CardTableComponent } from './card-table/card-table.component';
     MainMenuComponent,
     ListDecksComponent,
     ListCardsComponent,
-    CardTableComponent
+    CardTableComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

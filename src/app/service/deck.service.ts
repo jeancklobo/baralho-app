@@ -14,10 +14,6 @@ export class DeckService {
 
   }
 
-  test(){
-    alert('foi');
-  }
-
   returnById(id: number): Deck{
     this.decks = <Deck[]> JSON.parse(localStorage.getItem('baralhos-exemplo')!);
 

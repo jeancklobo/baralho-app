@@ -15,7 +15,6 @@ export class DeckServicePromice{
 
 
   getAll(): Promise<Deck[]>{
-    //return this.httpClient.get<Deck[]>(this.URL).toPromise();
     return lastValueFrom(this.httpClient.get<Deck[]>(this.URL));
   }
 

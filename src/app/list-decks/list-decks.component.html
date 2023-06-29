@@ -1,3 +1,35 @@
+<div class="row">
+  <div class="container">
+    <h5>Filtrar baralhos por tipo:</h5>
+    <span>Tipo Semi-Competitivo listados por padrão</span>
+
+  </div>
+  <div class="col s12 m4 right-align">
+    <label>
+      <input type="checkbox"
+      [checked]="competitive"
+      (click)="checkBoxClick($event, 'Competitivo')"/>
+      <span>Competitivo</span>
+    </label>
+  </div>
+  <div class="col s12 m4 center-align">
+    <label>
+      <input type="checkbox"
+      [checked]="semi"
+      (click)="checkBoxClick($event, 'Semi')"/>
+      <span>Semi-Competitivo</span>
+    </label>
+  </div>
+  <div class="col s12 m4 left-align">
+    <label>
+      <input type="checkbox"
+      [checked]="casual"
+      (click)="checkBoxClick($event, 'Casual')"/>
+      <span>Casual</span>
+    </label>
+  </div>
+</div>
+
 <table class="highlight responsive-table">
   <thead>
     <tr>

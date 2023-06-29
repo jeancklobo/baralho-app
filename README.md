@@ -1,9 +1,14 @@
 # baralho-app
 
-Projeto para a matéria Frameworks web.
+Projeto para a matéria Frameworks web. A aplicação consiste em um crud basico, cadastrando baralhos tcg e suas cartas,
+o projeto utiliza Angular, TypeScript, Materialize e json-server.
 ## Protótipo
 
 https://www.figma.com/file/YyS3IyccxNRL0fRuDpoD38/framework-web-projeto?type=design&t=l0WVLgVygBKZ8XeA-0
+
+## Endereço de deploy GitHub Pages
+
+https://jeancklobo.github.io/baralho-app/inicio
 
 ## Checklist
 
@@ -19,19 +24,20 @@ https://www.figma.com/file/YyS3IyccxNRL0fRuDpoD38/framework-web-projeto?type=des
 - [x] Passar dados entre componentes que representam diferentes telas via parâmetros de rotas.
 - [x] Validar campos do formulário com REGEX e apresentar os erros.
 - [x] Desabilitar o botão de submit enquanto o formulário está inválido.
-- [ ] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
-- [ ] Cadastrar uma entidade no JSON Server.
+- [x] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
+- [x] Cadastrar uma entidade no JSON Server.
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
-- [ ] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [x] Formatar a apresentação de dados com Pipes.
+- [x] Build e deploy da aplicação.
 
 ## Manual de execução
 - Clonar o repositório com `git clone`
 - Fazer checkout no branch `develop` que contém as modificações mais recentes
 - Abrir o projeto no editor Visual Studio Code (VS Code)
 - Abrir um terminal pelo VSCode e executar a API Fake (JSON Server) via o seguinte comando: 
-  - Comando: `npm run json-server --watch db.json --routes routes.json`
-  - O comando deve ser aplicado no diretório raiz do projeto, ou seja, que contém o arquivo `db.json` e `routes.json`.
+  - Comando: `npm run json-server --watch db.json`
+  - Ou usar o comando `npm run json:server` para rodar o script
+  - O comando deve ser aplicado no diretório raiz do projeto, ou seja, que contém o arquivo `db.json`.
 - Abrir um novo terminal pelo VSCode e então executar o projeto Angular
   - Comando: `ng s`

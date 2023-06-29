@@ -43,22 +43,20 @@ export class ListCardsComponent implements OnInit{
       //this.cardService.save(this.carta);
       this.cardServiceObservable.save(this.carta).subscribe(
         ()=>{console.log("Saved");
-        this.ngOnInit();
+        this.getDecks();//this.ngOnInit();
         });
     } else{
       //this.cardService.update(this.carta);
       this.cardServiceObservable.patch(this.carta).subscribe(
         ()=>{console.log("Updated");
-        this.ngOnInit();
+        this.getDecks();//this.ngOnInit();
         });
       this.save = true;
       this.color = 'red accent-3';
     }
     //this.cartas = this.cardService.returnCards(this.id);
-    //this.ngOnInit();
-    //this.getDecks();
     this.carta = new Card('',1);
-    //this.carta.id = this.id;
+    this.carta.deckId = this.id;
     this.form.reset();
     this.text = 'SALVAR';
   }
@@ -68,7 +66,7 @@ export class ListCardsComponent implements OnInit{
     this.delete = true;
     this.cardServiceObservable.delete(c).subscribe(
       ()=>{console.log("Deleted");
-      this.ngOnInit();
+      this.getDecks();//this.ngOnInit();
       });
     // this.cartas = this.cardService.returnCards(this.id);
     //this.getDecks();
@@ -92,10 +90,10 @@ export class ListCardsComponent implements OnInit{
   }
 
   reset(){
-    alert('reset');
     this.carta = new Card('',1);
     this.carta.deckId = this.id;
     this.form.reset();
+    this.save = true;
     this.text = 'SALVAR';
     this.color = 'red accent-3';
   }

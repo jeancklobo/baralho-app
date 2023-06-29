@@ -12,14 +12,11 @@ import { NgForm } from '@angular/forms';
 })
 export class AddDeckComponent implements OnInit{
 
-  //disable: boolean;
   @ViewChild('form') form!: NgForm;
   baralho: Deck;
   save: boolean = true;
   text!: string;
   color!: string;
- /*  @ViewChild('typeSelect') typeSelect!: ElementRef;
-  @ViewChild('gameSelect') gameSelect!: ElementRef; */
 
   tipos: String[] = 'Competitivo Semi-Competitivo Casual'.split(' ');
   jogos: String[] = [ 'Magic','Pokemon','Yu-Gi-Oh'];
@@ -28,7 +25,6 @@ export class AddDeckComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute,
     private deckServicePromice: DeckServicePromice){
-    //this.disable = false;
     this.baralho = new Deck('','','');
 
   }
@@ -43,17 +39,6 @@ export class AddDeckComponent implements OnInit{
           console.log('erro');
           this.baralho = this.deckService.returnById(params['id']);
         });
-        //this.baralho = this.deckService.returnById(params['id']);
-        /* this.deckServicePromice.getById(params['id'])
-        .then((value)=>{
-          this.baralho = value[0];
-          alert(this.baralho);
-        })
-        .catch(()=>
-          this.baralho = this.deckService.returnById(params['id'])
-          ); */
-          /* this.baralho = this.deckPromise.getById(params['id']);
-          console.log(this.baralho); */
         this.save = false;
         this.text = 'EDITAR';
         this.color = 'amber';
@@ -68,15 +53,7 @@ export class AddDeckComponent implements OnInit{
   }
 
   onClick(){
-/*     alert(`Baralho Salvo!!
-            Nome: ${this.baralho.name}
-            Jogo: ${this.baralho.game}
-            Tipo: ${this.baralho.type}`); */
-    //this.disable = true;
-
     if(this.save){
-
-      //let newDeck: Deck = new Deck(this.baralho.name,this.baralho.game,this.baralho.type);
 
       this.deckServicePromice.save(this.baralho)
       .then((value) => {
@@ -100,28 +77,22 @@ export class AddDeckComponent implements OnInit{
       }).catch(()=>{
         console.log('Erro! Não foi possível atualizar baralho!');
       });
-      /* .then((d)=>{
-        this.deckService.update(d);
-        console.log(`Baralho Salvo!!
-            Nome: ${d.name}
-            Jogo: ${d.game}
-            Tipo: ${d.type}`);
-      })
-      .catch(()=>{
-        console.log('Erro! Não foi possível adicionar baralho!')
-      }); */
-
 
     }
 
   }
 
   clean(){
-    this.baralho = new Deck('','','');
-    this.text = 'SALVAR';
-    this.color = 'red';
-    this.form.reset();
-    //this.disable = false;
+    if(this.save){
+
+      this.baralho = new Deck('','','');
+      this.text = 'SALVAR';
+      this.color = 'red';
+      this.form.reset();
+    }
+    else{
+      this.router.navigate(['listar']);
+    }
   }
 
   compareGames(s1: string, s2: string) {
@@ -138,11 +109,4 @@ export class AddDeckComponent implements OnInit{
     return false;
   }
 
-  /* listTypes(){
-    //atualiza o select para apresentar o elemento selecionado
-    setTimeout(() => {
-      M.FormSelect.init(this.typeSelect.nativeElement);
-      M.FormSelect.init(this.gameSelect.nativeElement);
-    }, 100);
-  } */
 }

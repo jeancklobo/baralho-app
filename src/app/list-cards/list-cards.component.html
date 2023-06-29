@@ -14,7 +14,7 @@
           pattern="^[A-Za-zÀ-Úà-ú\d\.\/:,'ºª\u0022!?-]+[A-Za-zÀ-Úà-ú\d\s\.:\/,'@ºª#\u0022!?-]*"
           type="text"
           required
-          placeholder="placeholder"
+          placeholder="Digite o nome de uma carta"
           [(ngModel)] = "this.carta.name"
           #name="ngModel"
           />
@@ -38,7 +38,8 @@
               required
               pattern="[1-9]"
               name="card-qtd"
-              [(ngModel)] = "this.carta.qtd" [defaultValue]=1
+              [(ngModel)] = "this.carta.qtd"
+              placeholder="1~9"
               #qtd="ngModel"/>
 
               <div class="red-text" *ngIf="qtd.errors && qtd.touched">
